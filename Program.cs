@@ -54,10 +54,8 @@
                     foreach (var group in g) Console.WriteLine($"{group.Key} was found {group.Count()} time(s).");
                 }
 
-                else if (menuPick.ToLower().Contains("largest"))
-                {
-                    Console.WriteLine($"{numbers.Max()}");
-                }
+                else if (menuPick.ToLower().Contains("largest")) Console.WriteLine($"{numbers.Max()}");
+
                 else if (menuPick.ToLower().Contains("smallest"))
                 {
 
