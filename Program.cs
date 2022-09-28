@@ -56,10 +56,8 @@
 
                 else if (menuPick.ToLower().Contains("largest")) Console.WriteLine($"{numbers.Max()}");
 
-                else if (menuPick.ToLower().Contains("smallest"))
-                {
+                else if (menuPick.ToLower().Contains("smallest")) Console.WriteLine($"{numbers.Min()}");
 
-                }
                 else if (menuPick.ToLower().Contains("sumandaverage"))
                 {
 
