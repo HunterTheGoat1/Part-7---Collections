@@ -4,7 +4,83 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!2");
+            string menuPick = "";
+            int value;
+            List<int> numbers = makeList();
+            while (true)
+            {
+                string listDisplay = "[";
+                foreach (int i in numbers) listDisplay = listDisplay + $"{i}, ";
+                listDisplay = listDisplay.Trim();
+                listDisplay = listDisplay.TrimEnd(',');
+                listDisplay = listDisplay + "]";
+                Console.WriteLine($"Your list:\n{listDisplay}");
+                Console.WriteLine("Menu");
+                Console.WriteLine("-sort");
+                Console.WriteLine("-newList");
+                Console.WriteLine("-removeNumber");
+                Console.WriteLine("-addNumber");
+                Console.WriteLine("-occurrences");
+                Console.WriteLine("-largest");
+                Console.WriteLine("-smallest");
+                Console.WriteLine("-sumAndAverage");
+                Console.WriteLine("-mostOccurring");
+                Console.WriteLine("-close");
+                menuPick = Console.ReadLine();
+
+                if (menuPick.ToLower().Contains("sort")) numbers.Sort();
+
+                else if (menuPick.ToLower().Contains("newlist")) numbers = makeList();
+
+                else if (menuPick.ToLower().Contains("removenumber"))
+                {
+                    Console.WriteLine("What number do you want to remove?");
+                    bool isInt = Int32.TryParse(Console.ReadLine(), out int numberToRemove);
+                    if (isInt) while (numbers.Remove(numberToRemove)) numbers.Remove(numberToRemove);
+                    else Console.WriteLine("You did not pick a whole number.");
+                }
+
+                else if (menuPick.ToLower().Contains("addnumber"))
+                {
+                    Console.WriteLine("What number do you want to add?");
+                    bool isInt = Int32.TryParse(Console.ReadLine(), out int numberToAdd);
+                    if (isInt) numbers.Add(numberToAdd);
+                    else Console.WriteLine("You did not pick a whole number.");
+                }
+
+                else if (menuPick.ToLower().Contains("occurrences"))
+                {
+                    var g = numbers.GroupBy(i => i);
+                    foreach (var group in g) Console.WriteLine($"{group.Key} was found {group.Count()} time(s).");
+                }
+
+                else if (menuPick.ToLower().Contains("largest"))
+                {
+                    Console.WriteLine($"{numbers.Max()}");
+                }
+                else if (menuPick.ToLower().Contains("smallest"))
+                {
+
+                }
+                else if (menuPick.ToLower().Contains("sumandaverage"))
+                {
+
+                }
+                else if (menuPick.ToLower().Contains("mostoccurring"))
+                {
+
+                }
+                else if (menuPick.ToLower().Contains("close")) break;
+
+                else Console.WriteLine("That is not a choice.");
+            }
+        }
+        static public List<int> makeList()
+        {
+            Random randomGen = new Random();
+            List<int> numbers = new List<int>();
+            for (int i = 0; i < 20; i++) numbers.Add(randomGen.Next(10, 21));
+            return numbers;
         }
     }
 }
