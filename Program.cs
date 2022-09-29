@@ -1,4 +1,7 @@
-﻿namespace Part_7___Collections
+﻿using Microsoft.VisualBasic;
+using System.Collections.Generic;
+
+namespace Part_7___Collections
 {
     internal class Program
     {
@@ -60,11 +63,29 @@
 
                 else if (menuPick.ToLower().Contains("sumandaverage"))
                 {
-
+                    double sumOfNumbers = 0;
+                    double count = 0;
+                    foreach (int number in numbers)
+                    {
+                        sumOfNumbers = sumOfNumbers + number;
+                        count++;
+                    }
+                    Console.WriteLine($"Sum: {sumOfNumbers}\nAverage: {Math.Round(sumOfNumbers/count,3)}");
                 }
                 else if (menuPick.ToLower().Contains("mostoccurring"))
                 {
-
+                    int mostOccurring = 0;
+                    int howManyOccurring = 0;
+                    var g = numbers.GroupBy(i => i);
+                    foreach (var group in g)
+                    {
+                        if(group.Count() > howManyOccurring)
+                        {
+                            howManyOccurring = group.Count();
+                            mostOccurring = group.Key;
+                        }
+                    }
+                    Console.WriteLine($"The most occurring number is {mostOccurring}. It was found {howManyOccurring} times.");
                 }
                 else if (menuPick.ToLower().Contains("close")) break;
 
