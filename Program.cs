@@ -12,6 +12,9 @@ namespace Part_7___Collections
             List<int> numbers = makeList();
             while (true)
             {
+                Console.WriteLine("Press enter to open the menu");
+                Console.ReadLine();
+                Console.Clear();
                 string listDisplay = "[";
                 foreach (int i in numbers) listDisplay = listDisplay + $"{i}, ";
                 listDisplay = listDisplay.Trim();
@@ -85,11 +88,31 @@ namespace Part_7___Collections
                             mostOccurring = group.Key;
                         }
                     }
-                    Console.WriteLine($"The most occurring number is {mostOccurring}. It was found {howManyOccurring} times.");
+                    Console.WriteLine($"The most occurring number(s) were found {howManyOccurring} times. They are:");
+                    foreach (var group in g)
+                    {
+                        if(group.Count() == howManyOccurring)
+                        {
+                            Console.WriteLine($"{group.Key}");
+                        }
+                    }
                 }
                 else if (menuPick.ToLower().Contains("close")) break;
 
                 else Console.WriteLine("That is not a choice.");
+            }
+            while(true)
+            {
+                Console.WriteLine("Press enter to open the menu.");
+                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("Menu");
+                Console.WriteLine("-removeVegetableIndex");
+                Console.WriteLine("-removeVegetableValue");
+                Console.WriteLine("-searchForVegetable");
+                Console.WriteLine("-addVegetable");
+                Console.WriteLine("-sortList");
+                Console.WriteLine("-clearList");
             }
         }
         static public List<int> makeList()
