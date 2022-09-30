@@ -7,6 +7,7 @@ namespace Part_7___Collections
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Note: after you close the number menu the string one will open.");
             string menuPick = "";
             int value;
             List<int> numbers = makeList();
@@ -101,11 +102,14 @@ namespace Part_7___Collections
 
                 else Console.WriteLine("That is not a choice.");
             }
-            while(true)
+            List<string> vegetables = new List<string>() { "CARROT", "BEET", "CELERY", "RADISH", "CABBAGE" };
+            while (true)
             {
                 Console.WriteLine("Press enter to open the menu.");
                 Console.ReadLine();
                 Console.Clear();
+                int count = 1;
+                foreach (string veg in vegetables) { Console.WriteLine($"{count} - {veg}"); count++; }
                 Console.WriteLine("Menu");
                 Console.WriteLine("-removeVegetableIndex");
                 Console.WriteLine("-removeVegetableValue");
@@ -113,6 +117,53 @@ namespace Part_7___Collections
                 Console.WriteLine("-addVegetable");
                 Console.WriteLine("-sortList");
                 Console.WriteLine("-clearList");
+                Console.WriteLine("-close");
+                menuPick = Console.ReadLine();
+                if (menuPick.ToLower().Contains("removevegetableindex"))
+                {
+                    Console.WriteLine("What index do you want to remove?");
+                    bool isInt = Int32.TryParse(Console.ReadLine(), out int indexToRemove);
+                    if (isInt) try
+                        {
+                            vegetables.RemoveAt(indexToRemove - 1);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("You did not pick a valid value.");
+                        }
+                }
+                else if (menuPick.ToLower().Contains("removevegetablevalue"))
+                {
+                    string valueToRemove;
+                    Console.WriteLine("Enter the value you want to remove");
+                    valueToRemove = Console.ReadLine();
+                    valueToRemove = valueToRemove.ToUpper();
+                    vegetables.Remove(valueToRemove);
+                }
+                else if (menuPick.ToLower().Contains("searchforvegetable"))
+                {
+                    Console.WriteLine("Enter the value you want to look for?");
+                    string valueTofind = Console.ReadLine();
+                    count = 0;
+                    foreach (var ve in vegetables)
+                    {
+                        count++;
+                        if (ve == valueTofind.ToUpper()) Console.WriteLine($"Found {ve}, index is {count}");
+                    }
+                }
+                else if (menuPick.ToLower().Contains("addvegetable"))
+                {
+                    Console.WriteLine("Type the name of the vegetable you want to add");
+                    string newVeg = Console.ReadLine().ToUpper();
+                    bool inList = false;
+                    foreach (var ve in vegetables) if (ve == newVeg) inList = true;
+                    if (!inList) vegetables.Add(newVeg);
+                    else Console.WriteLine("In list already.");
+                }
+                else if (menuPick.ToLower().Contains("sortlist")) vegetables.Sort();
+                else if (menuPick.ToLower().Contains("clearlist")) vegetables.Clear();
+                else if (menuPick.ToLower().Contains("close")) break;
+                else Console.WriteLine("Invalid choice.");
             }
         }
         static public List<int> makeList()
